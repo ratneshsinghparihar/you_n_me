@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#140e10" />
+    <title>this, or that.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,620;9..144,700&family=Figtree:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="glow" aria-hidden="true"></div>
+    <div id="fx" class="fx" aria-hidden="true"></div>
+
+    <div class="app">
+      <header class="top">
+        <p class="eyebrow">for the two of you</p>
+        <h1>this, or that.</h1>
+        <div class="presence" id="presence">
+          <span class="pill him" id="pill-him">him</span>
+          <span class="dot" id="live-dot"></span>
+          <span class="pill her" id="pill-her">her</span>
+        </div>
+      </header>
+
+      <main class="sheet">
+        <section id="view-lobby" class="view lobby">
+          <p class="lead">One of you is him. One of you is her. Same page. No codes.</p>
+          <div class="roles">
+            <button class="role him" data-role="him" type="button">
+              <span class="role-kicker">join as</span>
+              <span class="role-name">Him</span>
+              <span class="role-note">the teal one</span>
+            </button>
+            <button class="role her" data-role="her" type="button">
+              <span class="role-kicker">join as</span>
+              <span class="role-name">Her</span>
+              <span class="role-note">the rose one</span>
+            </button>
+          </div>
+          <p class="hint" id="lobby-hint">Open this on both phones.</p>
+        </section>
+
+        <section id="view-play" class="view play hidden">
+          <p class="progress" id="progress">1 · 24</p>
+          <p class="status" id="status">Waiting for your person.</p>
+          <div class="choices" id="choices">
+            <button class="choice" data-choice="a" type="button">
+              <span class="choice-kicker">this</span>
+              <span class="choice-text" id="choice-a">—</span>
+            </button>
+            <p class="or">or</p>
+            <button class="choice" data-choice="b" type="button">
+              <span class="choice-kicker">that</span>
+              <span class="choice-text" id="choice-b">—</span>
+            </button>
+          </div>
+        </section>
+
+        <section id="view-kiss" class="view ending hidden">
+          <p class="kiss-mark" aria-hidden="true">💋</p>
+          <h2>always a kiss at the end</h2>
+          <p class="lead">Whatever you picked, you still found each other.</p>
+          <button id="again" class="again" type="button">one more round</button>
+        </section>
+      </main>
+
+      <section class="stage" id="stage" aria-hidden="true">
+        <div class="ground"></div>
+        <div class="heart-burst" id="heart-burst"></div>
+        <div class="person him" id="person-him">
+          <svg viewBox="0 0 80 120" class="figure">
+            <ellipse class="shadow" cx="40" cy="114" rx="18" ry="4" />
+            <path class="body" d="M28 58c0-10 6-16 12-16s12 6 12 16v28c0 6-4 10-12 10s-12-4-12-10z" />
+            <path class="arm left" d="M28 64c-8 6-10 16-8 22" />
+            <path class="arm right" d="M52 64c8 6 10 16 8 22" />
+            <path class="leg" d="M34 86v22" />
+            <path class="leg" d="M46 86v22" />
+            <circle class="head" cx="40" cy="34" r="14" />
+            <path class="hair him-hair" d="M26 34c0-12 6-18 14-18 7 0 14 5 14 16 0 0-4-6-8-6-3 0-5 3-6 3s-3-4-7-4c-4 0-7 5-7 9z" />
+            <circle class="eye" cx="35" cy="34" r="1.4" />
+            <circle class="eye" cx="45" cy="34" r="1.4" />
+            <path class="smile" d="M36 40c2 2 6 2 8 0" />
+          </svg>
+          <span class="tag">him</span>
+        </div>
+        <div class="person her" id="person-her">
+          <svg viewBox="0 0 80 120" class="figure">
+            <ellipse class="shadow" cx="40" cy="114" rx="18" ry="4" />
+            <path class="dress" d="M26 58c2-10 7-15 14-15s12 5 14 15l6 34c0 6-8 10-20 10s-20-4-20-10z" />
+            <path class="arm left" d="M28 64c-8 6-10 16-8 22" />
+            <path class="arm right" d="M52 64c8 6 10 16 8 22" />
+            <circle class="head" cx="40" cy="34" r="14" />
+            <path class="hair her-hair" d="M22 40c1-16 8-24 18-24s17 8 18 24c0 10-3 18-6 22-2-8-4-12-12-12s-10 4-12 12c-3-4-6-12-6-22z" />
+            <circle class="eye" cx="35" cy="34" r="1.4" />
+            <circle class="eye" cx="45" cy="34" r="1.4" />
+            <path class="smile" d="M36 40c2 2 6 2 8 0" />
+          </svg>
+          <span class="tag">her</span>
+        </div>
+        <div class="mid-heart" id="mid-heart">❤</div>
+      </section>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/app.js"></script>
+  </body>
+</html>
