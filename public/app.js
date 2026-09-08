@@ -1,4 +1,8 @@
-const socket = io();
+const hosted = !["localhost", "127.0.0.1"].includes(location.hostname);
+const socket = io({
+  transports: hosted ? ["polling", "websocket"] : ["websocket", "polling"],
+  upgrade: true,
+});
 
 const views = {
   lobby: document.getElementById("view-lobby"),

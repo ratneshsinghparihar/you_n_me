@@ -24,14 +24,22 @@ function lanAddress() {
 }
 
 const PORT = process.env.PORT || 3000;
-const DATA_DIR = path.join(__dirname, "data");
+const ON_SERVERLESS = Boolean(
+  process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME
+);
+const DATA_DIR =
+  process.env.DATA_DIR ||
+  (ON_SERVERLESS ? path.join(os.tmpdir(), "this-or-that") : path.join(__dirname, "data"));
 const SESSION_FILE = path.join(DATA_DIR, "session.json");
 const REVEAL_MS = 2200;
 const HUG_MS = 3800;
 
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+  cors: { origin: true },
+  transports: ["polling", "websocket"],
+});
 
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -79,7 +87,6 @@ function loadState() {
 }
 
 function persist() {
-  fs.mkdirSync(DATA_DIR, { recursive: true });
   const snapshot = {
     questions: state.questions,
     questionIndex: state.questionIndex,
@@ -90,7 +97,12 @@ function persist() {
     phase: state.phase === "hug" ? "reveal" : state.phase,
     startedAt: state.startedAt,
   };
-  fs.writeFileSync(SESSION_FILE, JSON.stringify(snapshot, null, 2));
+  try {
+    fs.mkdirSync(DATA_DIR, { recursive: true });
+    fs.writeFileSync(SESSION_FILE, JSON.stringify(snapshot, null, 2));
+  } catch (error) {
+    console.warn("session not written:", error.message);
+  }
 }
 
 const seats = {
@@ -283,10 +295,13 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(PORT, () => {
-  fs.mkdirSync(DATA_DIR, { recursive: true });
-  persist();
-  const lan = lanAddress();
-  console.log(`this or that → http://localhost:${PORT}`);
-  if (lan) console.log(`phones on wifi → http://${lan}:${PORT}`);
-});
+if (!ON_SERVERLESS) {
+  server.listen(PORT, () => {
+    persist();
+    const lan = lanAddress();
+    console.log(`this or that → http://localhost:${PORT}`);
+    if (lan) console.log(`phones on wifi → http://${lan}:${PORT}`);
+  });
+}
+
+module.exports = server;
