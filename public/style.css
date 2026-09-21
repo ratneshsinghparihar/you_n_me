@@ -274,6 +274,14 @@ h2 {
   margin-bottom: 8px;
 }
 
+.prompt {
+  font-family: Fraunces, serif;
+  font-size: clamp(1.35rem, 6vw, 1.85rem);
+  line-height: 1.25;
+  text-align: center;
+  margin: 6px 0 14px;
+}
+
 .status {
   color: var(--muted);
   min-height: 1.4em;

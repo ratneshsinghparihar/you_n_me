@@ -31,7 +31,7 @@
 
       <main class="sheet">
         <section id="view-lobby" class="view lobby">
-          <p class="lead">One of you is him. One of you is her. Same page. No codes.</p>
+            <p class="lead">One of you is him. One of you is her. Guess whose vibe it is.</p>
           <div class="roles">
             <button class="role him" data-role="him" type="button">
               <span class="role-kicker">join as</span>
@@ -49,16 +49,17 @@
 
         <section id="view-play" class="view play hidden">
           <p class="progress" id="progress">1 · 24</p>
+          <p class="prompt" id="prompt">Who is this?</p>
           <p class="status" id="status">Waiting for your person.</p>
           <div class="choices" id="choices">
-            <button class="choice" data-choice="a" type="button">
-              <span class="choice-kicker">this</span>
-              <span class="choice-text" id="choice-a">—</span>
+            <button class="choice her" data-choice="a" type="button">
+              <span class="choice-kicker">her</span>
+              <span class="choice-text" id="choice-a">Libra girl</span>
             </button>
             <p class="or">or</p>
-            <button class="choice" data-choice="b" type="button">
-              <span class="choice-kicker">that</span>
-              <span class="choice-text" id="choice-b">—</span>
+            <button class="choice him" data-choice="b" type="button">
+              <span class="choice-kicker">him</span>
+              <span class="choice-text" id="choice-b">Capricorn man</span>
             </button>
           </div>
         </section>

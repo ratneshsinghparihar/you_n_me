@@ -13,6 +13,7 @@ const views = {
 const els = {
   hint: document.getElementById("lobby-hint"),
   progress: document.getElementById("progress"),
+  prompt: document.getElementById("prompt"),
   status: document.getElementById("status"),
   choiceA: document.getElementById("choice-a"),
   choiceB: document.getElementById("choice-b"),
@@ -149,6 +150,7 @@ function render(state, fxType) {
 
   show("play");
   if (state.question) {
+    els.prompt.textContent = state.question.q || "Who is this?";
     els.choiceA.textContent = state.question.a;
     els.choiceB.textContent = state.question.b;
   }
